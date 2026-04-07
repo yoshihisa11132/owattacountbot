@@ -5,6 +5,11 @@ __pycache__/
 
 # C extensions
 *.so
+.env
+
+# 自作のデータファイルを追加
+warocheck.json
+waroblcheck.txt
 
 # Distribution / packaging
 .Python
