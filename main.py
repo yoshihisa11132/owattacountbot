@@ -135,7 +135,7 @@ async def on_message(message):
         return
       if bl(id,"check") == True:
         noun = wordplus(message.author.id)
-        await message.reply(f"{noun}回{word}って言ったらしいよ\n-# [諸説あり]")
+        await message.reply(f"{word}って言ったのは{noun}回らしいよ\n-# [諸説あり]")
 
     if message.content.startswith(f"{prefix}check"):
         noun = wordcheck(message.author.id)
