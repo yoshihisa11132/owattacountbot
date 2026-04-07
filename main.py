@@ -122,6 +122,7 @@ def wordcheck(userid):
 @client.event
 async def on_ready():
     print(f'We have logged in as {client.user}')
+    await client.change_presence(activity=discord.Activity(name=f"**{prefix}help**", type=discord.ActivityType.playing))
 
 @client.event
 async def on_message(message):
@@ -130,7 +131,7 @@ async def on_message(message):
 
     if word in message.content:
       try:
-        id = message.guild.id
+        id = message.channel.id
       except:
         return
       if bl(id,"check") == True:
@@ -142,16 +143,26 @@ async def on_message(message):
         await message.reply(f"いままでに{noun}回{word}と言った事があるようですよ？\n-# [諸説あり]")
 
     if message.content.startswith(f"{prefix}help"):
-        await message.reply(f"{word} - カウントされます\n{prefix}check - あなたのカウントを見れるらしいね\n{prefix}bl - サーバーのカウントを停止するでー\n{prefix}help - こ　れ\n(カウント回数はグローバルです。)\n作者はAIの使用についてこう公表しています。\n使用された箇所：\n・コードの監査や一部エラーの修正\n・replitの自動補完\n使用されていない箇所：\n・大半のコードの作成\n・botのアイコンや名前\n・サーバーのホスティング\n\nこのbotはオープンソースです。\n{repo}")
+        await message.reply(f"{word} - カウントされます\n{prefix}check - あなたのカウントを見れるらしいね\n{prefix}bl - チャンネルのカウントを停止するでー\n{prefix}help - こ　れ\n{prefix}ping - pingこまんどらしい\n(カウント回数はグローバルです。)\n作者はAIの使用についてこう公表しています。\n使用された箇所：\n・コードの監査や一部エラーの修正\n・replitの自動補完\n・githubへのcommitとpush←New！\n使用されていない箇所：\n・大半のコードの作成\n・botのアイコンや名前\n・サーバーのホスティング\n\nこのbotはオープンソースです。\n{repo}")
 
     if message.content.startswith(f"{prefix}bl"):
       try:
-        id = message.guild.id
+        id = message.channel.id
       except:
         return
       if bl(id,"plus") == True:
-          await message.reply(f"サーバーの{word}カウントを停止したよ！")
+          await message.reply(f"チャンネルの{word}カウントを停止したよ！")
       else:
-          await message.reply(f"サーバーの{word}カウントを再開したよ！")
+          await message.reply(f"チャンネルの{word}カウントを再開したよ！")
+
+    if message.content.startswith(f"{prefix}ping"):
+        # Ping値を秒単位で取得
+        raw_ping = client.latency
+
+        # ミリ秒に変換して丸める
+        ping = round(raw_ping * 1000)
+
+        # 送信する
+        await message.reply(f"Pong!\nBotのPing値は{ping}msです。")
 
 client.run(os.getenv('token'))
