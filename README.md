@@ -15,7 +15,4 @@
 <p>5. 完成！</p>
 <hr>
 <h3>.envのテンプレート</h3>
-<p>github gistに置いてるので都度調整して.envとして保存してください。</p>
-[そのりんく](https://gist.github.com/yoshihisa11132/4f73ad3fbf1a974ed4c1b62c0be0f98c)
-
-
+<p>リポジトリ内にあるsample.envをコピーして.envに名前変えてつかってね！</p>
